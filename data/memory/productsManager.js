@@ -1,16 +1,17 @@
-const fs = require("fs");
+const crypto = require("crypto");
+
 class ProductManager {
   #products = [];
-  #productId = 0;
 
   create(data) {
     const product = {
-      id: this.#productId++,
+      id: crypto.randomBytes(12).toString("hex"),
       title: data.title,
-      photo: data.photo,
+      photo: data.photo || "defaultphoto.jpg", // Default photo if none provided
       category: data.category,
       price: data.price,
       stock: data.stock,
+      date: data.date || new Date(),
     };
 
     this.#products.push(product);
@@ -18,141 +19,92 @@ class ProductManager {
   read() {
     return this.#products;
   }
+  readOne(id) {
+    try {
+      const product = this.#products.find((product) => product.id === id);
+      if (!product) {
+        throw new Error("User not found");
+      }
+      return product;
+    } catch (error) {
+      console.error(`Error reading product: ${error.message}`);
+    }
+  }
+
+  destroy(id) {
+    try {
+      const indexOfProducts = this.#products.indexOf(
+        (product) => product.role === role
+      );
+      if (indexOfProducts === -1) {
+        throw new Error("No product was found to delete");
+      }
+      return this.#products.splice(indexOfProducts, 1)[0];
+    } catch (error) {
+      console.error(`Error deleting product: ${error.message}`);
+    }
+  }
 }
 
 const productManager = new ProductManager();
 productManager.create({
-  title: "Tablet",
-  photo: "https://google.com/photos/tablets",
-  category: "Home Tablets",
-  price: 120,
-  stock: true,
+  title: "Product 1",
+  category: "Books",
+  price: 10.99,
+  stock: 50,
+}),
+  productManager.create({
+    title: "Product 2",
+    category: "Electronics",
+    price: 299.99,
+    stock: 30,
+  });
+productManager.create({
+  title: "Product 3",
+  category: "Clothing",
+  price: 19.99,
+  stock: 100,
 });
 productManager.create({
-  title: "Mouse",
-  photo: "https://google.com/photos/mouse",
-  category: "Accessories",
-  price: 60,
-  stock: false,
+  title: "Product 4",
+  category: "Groceries",
+  price: 3.49,
+  stock: 200,
 });
 productManager.create({
-  title: "Headphones",
-  photo: "https://google.com/photos/headphones",
-  category: "Accessories Audio",
-  price: 160,
-  stock: true,
+  title: "Product 5",
+  category: "Toys",
+  price: 25.99,
+  stock: 80,
 });
 productManager.create({
-  title: "Laptop",
-  photo: "https://google.com/photos/laptops",
-  category: "Laptops",
-  price: 620,
-  stock: false,
+  title: "Product 6",
+  category: "Books",
+  price: 15.99,
+  stock: 40,
 });
 productManager.create({
-  title: "Desktop PC",
-  photo: "https://google.com/photos/desktops",
-  category: "Desktops",
-  price: 520,
-  stock: true,
+  title: "Product 7",
+  category: "Electronics",
+  price: 459.99,
+  stock: 25,
 });
-
+productManager.create({
+  title: "Product 8",
+  category: "Clothing",
+  price: 29.99,
+  stock: 90,
+});
+productManager.create({
+  title: "Product 9",
+  category: "Groceries",
+  price: 2.99,
+  stock: 150,
+});
+productManager.create({
+  title: "Product 1",
+  category: "Toys",
+  price: 34.99,
+  stock: 60,
+});
 console.log(productManager.read());
-
-/*async function test() {
-    try {
-      const manager = new ProductManager();
-      await manager.create({ title: "Test Product", category: "Books", price: 9.99, stock: 100 });
-      const products = await manager.read();
-      console.log(products);
-      const product = await manager.readOne(products[2].id);
-      console.log(product);
-      await manager.destroy(product.id);
-      manager.destroy('')
-      console.log(await manager.read());
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  test();
-/*
-
-
-/*const productManager = new ProductManager();
-productManager.create({
-  title: "Tablet",
-  photo: "https://google.com/photos/tablets",
-  category: "Home Tablets",
-  price: 120,
-  stock: true,
-});
-productManager.create({
-  title: "Mouse",
-  photo: "https://google.com/photos/mouse",
-  category: "Accessories",
-  price: 60,
-  stock: false,
-});
-productManager.create({
-  title: "Headphones",
-  photo: "https://google.com/photos/headphones",
-  category: "Accessories Audio",
-  price: 160,
-  stock: true,
-});
-productManager.create({
-  title: "Laptop",
-  photo: "https://google.com/photos/laptops",
-  category: "Laptops",
-  price: 620,
-  stock: false,
-});
-productManager.create({
-  title: "Desktop PC",
-  photo: "https://google.com/photos/desktops",
-  category: "Desktops",
-  price: 520,
-  stock: true,
-});
-productManager.create({
-  title: "Printers",
-  photo: "https://google.com/photos/printers",
-  category: "Printers",
-  price: 120,
-  stock: true,
-});
-productManager.create({
-  title: "Tables",
-  photo: "https://google.com/photos/tables",
-  category: "Furniture",
-  price: 820,
-  stock: true,
-});
-productManager.create({
-  title: "Keyboard",
-  photo: "https://google.com/photos/keyboard",
-  category: "Accessories",
-  price: 220,
-  stock: false,
-});
-productManager.create({
-  title: "Gaming Chair",
-  photo: "https://google.com/photos/gamingchair",
-  category: "Accessories",
-  price: 620,
-  stock: false,
-});
-productManager.create({
-  title: "Ink",
-  photo: "https://google.com/photos/ink",
-  category: "Supplies",
-  price: 80,
-  stock: true,
-});
-
-productManager.readOne();
-productManager.destroy();
-
-console.log(productManager.read());
-*/

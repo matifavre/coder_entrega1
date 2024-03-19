@@ -18,7 +18,7 @@ class Users {
 
       this.#users.push(user);
     } catch (error) {
-      console.error(`Error creating product: ${error.message}`);
+      console.error(`Error creating user: ${error.message}`);
       throw error;
     }
   }
@@ -36,7 +36,7 @@ class Users {
       console.error(`Error reading user: ${error.message}`);
     }
   }
-  destroy(role) {
+  destroy(id) {
     try {
       const indexOfUsers = this.#users.indexOf((user) => user.role === role);
       if (indexOfUsers === -1) {
@@ -48,7 +48,6 @@ class Users {
     }
   }
 }
-
 
 const users = new Users();
 users.create({
@@ -64,6 +63,6 @@ users.create({
   role: "Power User",
 });
 users.readOne();
-users.destroy('Administrator');
+users.destroy("Administrator");
 
 console.log(users.read());

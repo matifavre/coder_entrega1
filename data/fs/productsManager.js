@@ -84,10 +84,12 @@ class ProductManager {
         throw new Error("Product not found to delete");
       }
       let filteredProducts = products.filter((product) => product.id !== id);
-      filteredProducts = JSON.stringify(filteredProducts,null,3);
+      filteredProducts = JSON.stringify(filteredProducts, null, 3);
       const [deletedProduct] = products.slice(index, 1);
-      await fs.promises.writeFile(this.path,filteredProducts);
-      console.log(`Product with Id: ${deletedProduct.id} and name ${deletedProduct.title}`);
+      await fs.promises.writeFile(this.path, filteredProducts);
+      console.log(
+        `Product with Id: ${deletedProduct.id} and name ${deletedProduct.title}`
+      );
       return deletedProduct;
     } catch (error) {
       console.error("Error deleting product:", error.message);
@@ -118,4 +120,5 @@ async function saveProducts() {
   }
 }
 saveProducts().catch(console.error);
+//manager.readOne()
 //manager.destroy('eff2f353f6c88533fb46c692');
