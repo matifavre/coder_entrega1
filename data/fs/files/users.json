@@ -1,0 +1,30 @@
+[
+  {
+    "id": "c5a4d500e3017ac98ff08f0f",
+    "photo": "https://google.com/photos/nicolas.jpg",
+    "email": "testinganotheremail1@gmail.com",
+    "password": "notasafepassword1",
+    "role": "Admin"
+  },
+  {
+    "id": "35248375981ff2eb6f98041f",
+    "photo": "https://google.com/photos/mateo.jpg",
+    "email": "testinganotheremail2@gmail.com",
+    "password": "notasafepassword2",
+    "role": "Super User"
+  },
+  {
+    "id": "8513b95ff4c1d6bc441a5656",
+    "photo": "https://google.com/photos/agus.jpg",
+    "email": "testinganotheremail3@gmail.com",
+    "password": "notasafepassword3",
+    "role": "Dev"
+  },
+  {
+    "id": "285b8c693bf54f275b3bc217",
+    "photo": "https://google.com/photos/maria.jpg",
+    "email": "testinganotheremail4@gmail.com",
+    "password": "notasafepassword4",
+    "role": "User"
+  }
+]
