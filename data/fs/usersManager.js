@@ -1,5 +1,5 @@
-const fs = require("fs");
-const crypto = require("crypto");
+import fs from "fs";
+import crypto from "crypto";
 
 class UsersManager {
   constructor() {
@@ -10,8 +10,44 @@ class UsersManager {
     if (!fs.existsSync(this.path)) {
       fs.writeFileSync(this.path, JSON.stringify([], null, 3));
       console.log("User file created");
+      this.saveUsers().catch(console.error);
     } else {
       console.log("User file exists");
+    }
+  }
+
+  async saveUsers() {
+    // Example array of 4 users
+    const userToSave = [
+      {
+        photo: "https://google.com/photos/nicolas.jpg",
+        email: "testinganotheremail1@gmail.com",
+        password: "notasafepassword1",
+        role: "Admin",
+      },
+      {
+        photo: "https://google.com/photos/mateo.jpg",
+        email: "testinganotheremail2@gmail.com",
+        password: "notasafepassword2",
+        role: "Super User",
+      },
+      {
+        photo: "https://google.com/photos/agus.jpg",
+        email: "testinganotheremail3@gmail.com",
+        password: "notasafepassword3",
+        role: "Dev",
+      },
+      {
+        photo: "https://google.com/photos/maria.jpg",
+        email: "testinganotheremail4@gmail.com",
+        password: "notasafepassword4",
+        role: "User",
+      },
+    ];
+    // Iterate over the users and save each one
+    for (const user of userToSave) {
+      await this.create(user);
+      console.log(`Saved user: ${user.role}`);
     }
   }
 
@@ -25,7 +61,7 @@ class UsersManager {
           photo: data.photo || "defaultphoto.jpg",
           email: data.email,
           password: data.password,
-          role: data.role, // if no Date provided we will use the default date
+          role: data.role ?? 0,
         };
         let users = await fs.promises.readFile(this.path, "utf-8");
         users = JSON.parse(users);
@@ -45,7 +81,7 @@ class UsersManager {
       return JSON.parse(users);
     } catch (error) {
       console.error("Error reading user:", error.message);
-      throw error;
+      return error;
     }
   }
 
@@ -53,13 +89,10 @@ class UsersManager {
     try {
       const users = await fs.promises.readFile(this.path, "utf-8");
       const user = JSON.parse(users).find((user) => user.id === id);
-      if (!product) {
-        throw new Error("User not found");
-      }
       return user;
     } catch (error) {
       console.error("Error reading user:", error.message);
-      throw error;
+      return error;
     }
   }
 
@@ -74,7 +107,7 @@ class UsersManager {
       let filteredUsers = users.filter((user) => user.id !== id);
       filteredUsers = JSON.stringify(filteredUsers, null, 3);
       const [deletedUser] = users.slice(index, 1);
-      await fs.promises.writeFile(this.path, filteredProducts);
+      await fs.promises.writeFile(this.path, filteredUsers);
       console.log(
         `User with Id: ${deletedUser.id} and role ${deletedUser.role}`
       );
@@ -87,40 +120,4 @@ class UsersManager {
 }
 
 const userManager = new UsersManager();
-async function saveUsers() {
-  // Example array of 10 products
-  const userToSave = [
-    {
-      photo: "https://google.com/photos/nicolas.jpg",
-      email: "testinganotheremail1@gmail.com",
-      password: "notasafepassword1",
-      role: "Admin",
-    },
-    {
-      photo: "https://google.com/photos/mateo.jpg",
-      email: "testinganotheremail2@gmail.com",
-      password: "notasafepassword2",
-      role: "Super User",
-    },
-    {
-      photo: "https://google.com/photos/agus.jpg",
-      email: "testinganotheremail3@gmail.com",
-      password: "notasafepassword3",
-      role: "Dev",
-    },
-    {
-      photo: "https://google.com/photos/maria.jpg",
-      email: "testinganotheremail4@gmail.com",
-      password: "notasafepassword4",
-      role: "User",
-    },
-  ];
-  // Iterate over the products and save each one
-  for (const user of userToSave) {
-    await userManager.create(user);
-    console.log(`Saved user: ${user.role}`);
-  }
-}
-saveUsers().catch(console.error);
-//userManager.destroy('eff2f353f6c88533fb46c692');
-//userManager.readOne('')
+export default userManager;

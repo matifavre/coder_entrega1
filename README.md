@@ -42,3 +42,35 @@ Users (FS) - ./data/fs/usersManager.js
 ProductManager(FS) - ./data/fs/productsManager.js
 Users (Memory): node ./data/memory/usersManager.js
 ProductManager (Memory): node ./data/memory/productsManager.js
+
+#Sprint_3
+
+Added features:
+
+1- Created folder structure that consists of:
+.
+├── Data/
+│ ├── FS/
+│ │ ├── ProductManager.js
+│ │ └── UserManager.js
+│ ├── Files/
+│ │ ├── users.json (if created)
+│ │ └── products.json (if created)
+│ └── Memory/
+│ ├── ProductManager.js
+│ └── UserManager.js
+├── .gitignore
+├── package.json
+├── server.js
+└── Readme.MD
+
+2- Created package.json, package-lock.json, node_modules (excluded in gitignore) and server.js to be able to add the following endpoints:
+a) GET /api/products and GET /api/users
+b) GET /api/products/:pid and GET /api/users/:uid
+
+3 - To the productsManager and usersManager classes in FS, I've added/changed:
+a) changed the require for import (newest ECMA)
+b) added export default in order to be able to use the instances in server.js
+
+In order to test the use cases:
+npm run dev

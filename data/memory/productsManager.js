@@ -102,7 +102,67 @@ productManager.create({
   stock: 150,
 });
 productManager.create({
-  title: "Product 1",
+  title: "Product 10",
+  category: "Toys",
+  price: 34.99,
+  stock: 60,
+});
+productManager.create({
+  title: "Product 11",
+  category: "Toys",
+  price: 34.99,
+  stock: 60,
+});
+productManager.create({
+  title: "Product 12",
+  category: "Toys",
+  price: 34.99,
+  stock: 60,
+});
+productManager.create({
+  title: "Product 13",
+  category: "Toys",
+  price: 34.99,
+  stock: 60,
+});
+productManager.create({
+  title: "Product 14",
+  category: "Toys",
+  price: 34.99,
+  stock: 60,
+});
+productManager.create({
+  title: "Product 15",
+  category: "Toys",
+  price: 34.99,
+  stock: 60,
+});
+productManager.create({
+  title: "Product 16",
+  category: "Toys",
+  price: 34.99,
+  stock: 60,
+});
+productManager.create({
+  title: "Product 17",
+  category: "Toys",
+  price: 34.99,
+  stock: 60,
+});
+productManager.create({
+  title: "Product 18",
+  category: "Toys",
+  price: 34.99,
+  stock: 60,
+});
+productManager.create({
+  title: "Product 19",
+  category: "Toys",
+  price: 34.99,
+  stock: 60,
+});
+productManager.create({
+  title: "Product 20",
   category: "Toys",
   price: 34.99,
   stock: 60,

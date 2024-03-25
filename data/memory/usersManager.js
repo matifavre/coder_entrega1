@@ -62,6 +62,18 @@ users.create({
   password: "testinganpassword3",
   role: "Power User",
 });
+users.create({
+  photo: "https://google.com/photos/keyboard.jpg",
+  email: "testinganotheremail@gmail.com",
+  password: "testinganpassword3",
+  role: "Ultra Power User",
+});
+users.create({
+  photo: "https://google.com/photos/mouse.jpg",
+  email: "testinganotheremail@gmail.com",
+  password: "testinganpassword3",
+  role: "Ultra ultra Power User",
+});
 users.readOne();
 users.destroy("Administrator");
 
