@@ -1,0 +1,92 @@
+[
+   {
+      "id": "a4d533ebf9724d2c3b072f0f",
+      "title": "Product 1",
+      "photo": "defaultphoto.jpg",
+      "category": "Books",
+      "price": 10.99,
+      "stock": 50,
+      "date": "2024-03-18T22:18:33.914Z"
+   },
+   {
+      "id": "8128340eeabc96446a52cdb6",
+      "title": "Product 2",
+      "photo": "defaultphoto.jpg",
+      "category": "Electronics",
+      "price": 299.99,
+      "stock": 30,
+      "date": "2024-03-18T22:18:33.916Z"
+   },
+   {
+      "id": "914b8dbf1ed5fcfc3e95ba92",
+      "title": "Product 3",
+      "photo": "defaultphoto.jpg",
+      "category": "Clothing",
+      "price": 19.99,
+      "stock": 100,
+      "date": "2024-03-18T22:18:33.916Z"
+   },
+   {
+      "id": "6308b215a555dd2a916bfc24",
+      "title": "Product 4",
+      "photo": "defaultphoto.jpg",
+      "category": "Groceries",
+      "price": 3.49,
+      "stock": 200,
+      "date": "2024-03-18T22:18:33.916Z"
+   },
+   {
+      "id": "c1d29b200223581ef8d7b0e6",
+      "title": "Product 5",
+      "photo": "defaultphoto.jpg",
+      "category": "Toys",
+      "price": 25.99,
+      "stock": 80,
+      "date": "2024-03-18T22:18:33.917Z"
+   },
+   {
+      "id": "0bbf600482f740ebc269dc07",
+      "title": "Product 6",
+      "photo": "defaultphoto.jpg",
+      "category": "Books",
+      "price": 15.99,
+      "stock": 40,
+      "date": "2024-03-18T22:18:33.918Z"
+   },
+   {
+      "id": "3689ed26852ce54f2bdf7783",
+      "title": "Product 7",
+      "photo": "defaultphoto.jpg",
+      "category": "Electronics",
+      "price": 459.99,
+      "stock": 25,
+      "date": "2024-03-18T22:18:33.918Z"
+   },
+   {
+      "id": "dc6af8a9030e92ed45228ddb",
+      "title": "Product 8",
+      "photo": "defaultphoto.jpg",
+      "category": "Clothing",
+      "price": 29.99,
+      "stock": 90,
+      "date": "2024-03-18T22:18:33.919Z"
+   },
+   {
+      "id": "d419cbdbe66fd8500a493a88",
+      "title": "Product 9",
+      "photo": "defaultphoto.jpg",
+      "category": "Groceries",
+      "price": 2.99,
+      "stock": 150,
+      "date": "2024-03-18T22:18:33.920Z"
+   },
+   {
+      "id": "29165f5d8511bc5c25d18527",
+      "title": "Product 1",
+      "photo": "defaultphoto.jpg",
+      "category": "Toys",
+      "price": 34.99,
+      "stock": 60,
+      "date": "2024-03-18T22:18:33.920Z"
+   }
+]
