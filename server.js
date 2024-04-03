@@ -16,15 +16,15 @@ server.post("/api/products", async (req, res) => {
     const productData = req.body;
     const product = await productManager.create(productData);
     if (product) {
-      return res.status(200).json({
+      return res.status(201).json({
         statusCode: 201,
         response: product.id,
         message: "Product created successfully",
       });
     } else {
-      const error = new Error("Product creation failed");
-      error.statusCode = 400;
-      throw error;
+      return res.status(400).json({
+        message: "Product creation failed",
+      });
     }
   } catch (error) {
     console.error(error);
@@ -134,7 +134,7 @@ server.post("/api/users", async (req, res) => {
     const user = await userManager.create(userData);
     return res.status(201).json({
       statusCode: 201,
-      response: user.id,
+      response: user.id, // This should now work as expected
       message: "User created successfully",
     });
   } catch (error) {

@@ -54,20 +54,23 @@ class UsersManager {
   async create(data) {
     try {
       if (!data.email || !data.password || !data.role) {
-        throw new Error("Please provide email, password and role for the user");
+        throw new Error(
+          "Please provide email, password, and role for the user"
+        );
       } else {
         const user = {
           id: crypto.randomBytes(12).toString("hex"),
-          photo: data.photo || "defaultphoto.jpg",
+          photo: data.photo || "defaultphoto.jpg", // Default photo if none provided
           email: data.email,
           password: data.password,
-          role: data.role ?? 0,
+          role: data.role,
         };
         let users = await fs.promises.readFile(this.path, "utf-8");
         users = JSON.parse(users);
         users.push(user);
         await fs.promises.writeFile(this.path, JSON.stringify(users, null, 3));
         console.log("User created");
+        return user; // Return the created user object
       }
     } catch (error) {
       console.error("Error creating user:", error.message);

@@ -1,16 +1,7 @@
 [
    {
-      "id": "c6c513a7be99669f208f82aa",
-      "title": "Product 1",
-      "photo": "defaultphoto.jpg",
-      "category": "Books",
-      "price": 10.99,
-      "stock": 50,
-      "date": "2024-03-24T21:28:19.860Z"
-   },
-   {
       "id": "1ab68ecd08386552fafc3e1a",
-      "title": "Product 2",
+      "title": "product has been updated",
       "photo": "defaultphoto.jpg",
       "category": "Electronics",
       "price": 299.99,
@@ -178,5 +169,86 @@
       "price": 587.69,
       "stock": 63,
       "date": "2024-03-24T21:28:19.873Z"
+   },
+   {
+      "id": "9d603b9bde2287914a2490b9",
+      "title": "New Tablet",
+      "photo": "defaultphoto.jpg",
+      "category": "New Electronics",
+      "price": 20.99,
+      "stock": 30,
+      "date": "2024-03-24T21:28:19.863Z"
+   },
+   {
+      "id": "fe2f3b5ef23ed84597c5a7ec",
+      "title": "New Tablet",
+      "photo": "defaultphoto.jpg",
+      "category": "New Electronics",
+      "price": 20.99,
+      "stock": 40,
+      "date": "2024-04-03T20:18:33.326Z"
+   },
+   {
+      "id": "150031479e1637e3241314fb",
+      "title": "New Tablet",
+      "photo": "defaultphoto.jpg",
+      "category": "New Electronics",
+      "price": 20,
+      "stock": 40,
+      "date": "2024-04-03T20:18:40.791Z"
+   },
+   {
+      "id": "105ddd59ae80793516bc202d",
+      "title": "New Tablet 2",
+      "photo": "defaultphoto.jpg",
+      "category": "New Electronics",
+      "price": "20.22",
+      "stock": "40",
+      "date": "2024-04-03T20:19:15.630Z"
+   },
+   {
+      "id": "e4782aaffc87070507a332c8",
+      "title": "Your Product Title",
+      "photo": "defaultphoto.jpg",
+      "category": "Your Product Category",
+      "price": 99.99,
+      "stock": 100,
+      "date": "2024-04-03T20:26:05.964Z"
+   },
+   {
+      "id": "ba326777fd7d18e40a1c92df",
+      "title": "Your Product Title",
+      "photo": "defaultphoto.jpg",
+      "category": "Your Product Category",
+      "price": 99.99,
+      "stock": 100,
+      "date": "2024-04-03T20:26:12.886Z"
+   },
+   {
+      "id": "71c015c45b1ab27443b20504",
+      "title": "New Tablet",
+      "photo": "Newdefaultphoto.jpg",
+      "category": "Electronics",
+      "price": 299.99,
+      "stock": 30,
+      "date": "2024-03-24T21:28:19.863Z"
+   },
+   {
+      "id": "b4c4e7a2d997449357127e2c",
+      "title": "New Tablet",
+      "photo": "Newdefaultphoto.jpg",
+      "category": "Electronics",
+      "price": 299.99,
+      "stock": 30,
+      "date": "2024-03-24T21:28:19.863Z"
+   },
+   {
+      "id": "1d90808dbd9aefc475e389fa",
+      "title": "New Updated Laptop",
+      "photo": "defaultphoto.jpg",
+      "category": "Electronics New",
+      "price": 25,
+      "stock": 23,
+      "date": "2024-04-03T20:37:23.897Z"
    }
 ]

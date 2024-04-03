@@ -63,11 +63,11 @@ class ProductManager {
         const product = {
           id: crypto.randomBytes(12).toString("hex"),
           title: data.title,
-          photo: data.photo || "defaultphoto.jpg", // Default photo if none provided
+          photo: data.photo || "defaultphoto.jpg",
           category: data.category,
-          price: data.price || 1,
+          price: data.price,
           stock: data.stock,
-          date: data.date || new Date(), // if no Date provided we will use the default date
+          date: data.date || new Date(),
         };
         let products = await fs.promises.readFile(this.path, "utf-8");
         products = JSON.parse(products);
@@ -77,6 +77,7 @@ class ProductManager {
           JSON.stringify(products, null, 3)
         );
         console.log("Product created");
+        return product; // Return the created product object
       }
     } catch (error) {
       console.error("Error creating product:", error.message);
