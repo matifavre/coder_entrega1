@@ -1,0 +1,182 @@
+[
+   {
+      "id": "c6c513a7be99669f208f82aa",
+      "title": "Product 1",
+      "photo": "defaultphoto.jpg",
+      "category": "Books",
+      "price": 10.99,
+      "stock": 50,
+      "date": "2024-03-24T21:28:19.860Z"
+   },
+   {
+      "id": "1ab68ecd08386552fafc3e1a",
+      "title": "Product 2",
+      "photo": "defaultphoto.jpg",
+      "category": "Electronics",
+      "price": 299.99,
+      "stock": 30,
+      "date": "2024-03-24T21:28:19.863Z"
+   },
+   {
+      "id": "e19b5491ab8b239dcbbda8cd",
+      "title": "Product 3",
+      "photo": "defaultphoto.jpg",
+      "category": "Clothing",
+      "price": 19.99,
+      "stock": 100,
+      "date": "2024-03-24T21:28:19.864Z"
+   },
+   {
+      "id": "8354f8af43205f311ae68049",
+      "title": "Product 4",
+      "photo": "defaultphoto.jpg",
+      "category": "Groceries",
+      "price": 3.49,
+      "stock": 200,
+      "date": "2024-03-24T21:28:19.865Z"
+   },
+   {
+      "id": "d99a3119e14bea86a6c062a7",
+      "title": "Product 5",
+      "photo": "defaultphoto.jpg",
+      "category": "Toys",
+      "price": 25.99,
+      "stock": 80,
+      "date": "2024-03-24T21:28:19.865Z"
+   },
+   {
+      "id": "ac71f8b0a61718478c5d1e7a",
+      "title": "Product 6",
+      "photo": "defaultphoto.jpg",
+      "category": "Books",
+      "price": 15.99,
+      "stock": 40,
+      "date": "2024-03-24T21:28:19.866Z"
+   },
+   {
+      "id": "cb57699193a2ccfc5beb255f",
+      "title": "Product 7",
+      "photo": "defaultphoto.jpg",
+      "category": "Electronics",
+      "price": 459.99,
+      "stock": 25,
+      "date": "2024-03-24T21:28:19.867Z"
+   },
+   {
+      "id": "2104c846267caaa8792ce586",
+      "title": "Product 8",
+      "photo": "defaultphoto.jpg",
+      "category": "Clothing",
+      "price": 29.99,
+      "stock": 90,
+      "date": "2024-03-24T21:28:19.867Z"
+   },
+   {
+      "id": "4a4818db215981f29b607b74",
+      "title": "Product 9",
+      "photo": "defaultphoto.jpg",
+      "category": "Groceries",
+      "price": 2.99,
+      "stock": 150,
+      "date": "2024-03-24T21:28:19.868Z"
+   },
+   {
+      "id": "9e7fd25b47844095d296e142",
+      "title": "Product 10",
+      "photo": "defaultphoto.jpg",
+      "category": "Toys",
+      "price": 34.99,
+      "stock": 60,
+      "date": "2024-03-24T21:28:19.868Z"
+   },
+   {
+      "id": "7f16dc9c703cb3e4ce731ce1",
+      "title": "Product 11",
+      "photo": "defaultphoto.jpg",
+      "category": "Sports",
+      "price": 755.99,
+      "stock": 23,
+      "date": "2024-03-24T21:28:19.869Z"
+   },
+   {
+      "id": "0fc41c5a359494b5ddc18310",
+      "title": "Product 12",
+      "photo": "defaultphoto.jpg",
+      "category": "Electronics",
+      "price": 768.7,
+      "stock": 31,
+      "date": "2024-03-24T21:28:19.869Z"
+   },
+   {
+      "id": "d2dd805e208b48235e569ac6",
+      "title": "Product 13",
+      "photo": "defaultphoto.jpg",
+      "category": "Groceries",
+      "price": 121.84,
+      "stock": 23,
+      "date": "2024-03-24T21:28:19.870Z"
+   },
+   {
+      "id": "f771d29569a7e1fc5f7aff61",
+      "title": "Product 14",
+      "photo": "defaultphoto.jpg",
+      "category": "Books",
+      "price": 791.61,
+      "stock": 8,
+      "date": "2024-03-24T21:28:19.871Z"
+   },
+   {
+      "id": "00490afc298888fc2f57a70a",
+      "title": "Product 15",
+      "photo": "defaultphoto.jpg",
+      "category": "Groceries",
+      "price": 637.63,
+      "stock": 11,
+      "date": "2024-03-24T21:28:19.871Z"
+   },
+   {
+      "id": "71c11c2c2b695b8a37b89007",
+      "title": "Product 16",
+      "photo": "defaultphoto.jpg",
+      "category": "Clothing",
+      "price": 748.94,
+      "stock": 86,
+      "date": "2024-03-24T21:28:19.872Z"
+   },
+   {
+      "id": "b2c0405adcc3d60ac60bebbf",
+      "title": "Product 17",
+      "photo": "defaultphoto.jpg",
+      "category": "Toys",
+      "price": 633.97,
+      "stock": 84,
+      "date": "2024-03-24T21:28:19.872Z"
+   },
+   {
+      "id": "16fa3437b8e5de18619d2d48",
+      "title": "Product 18",
+      "photo": "defaultphoto.jpg",
+      "category": "Sports",
+      "price": 124,
+      "stock": 44,
+      "date": "2024-03-24T21:28:19.872Z"
+   },
+   {
+      "id": "3df1d35c30bdfb1d96203038",
+      "title": "Product 19",
+      "photo": "defaultphoto.jpg",
+      "category": "Sports",
+      "price": 271.33,
+      "stock": 32,
+      "date": "2024-03-24T21:28:19.873Z"
+   },
+   {
+      "id": "3acb04a1b39a39820215983f",
+      "title": "Product 20",
+      "photo": "defaultphoto.jpg",
+      "category": "Groceries",
+      "price": 587.69,
+      "stock": 63,
+      "date": "2024-03-24T21:28:19.873Z"
+   }
+]
