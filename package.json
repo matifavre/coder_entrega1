@@ -1,0 +1,32 @@
+{
+  "name": "coder_entrega1",
+  "version": "1.0.0",
+  "description": "Created 2 class with the following structure:",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./server.js",
+    "dev": "nodemon ./server.js"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "data/fs/files"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matifavre/coder_entrega1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matifavre/coder_entrega1/issues"
+  },
+  "homepage": "https://github.com/matifavre/coder_entrega1#readme",
+  "dependencies": {
+    "express": "^4.19.1",
+    "nodemon": "^3.1.0"
+  }
+}
