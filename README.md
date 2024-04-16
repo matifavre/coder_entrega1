@@ -16,6 +16,10 @@ Project structure:
 │ │ ├── ProductManager.js
 │ │ └── UserManager.js
 │ └── routers
+│ └── views
+│     └──layouts
+│         └── main.handlebars
+│ └── index.handlebars
 ├── .gitignore
 ├── package.json
 ├── server.js
@@ -122,6 +126,13 @@ Both fs instances of productsManager and usersManager are using export default i
   - **Code:** 200
   - **Content:** `{ message: "User deleted successfully" }`
 - **Error Handling:** Use `errorHandler` to handle any errors.
+
+
+Added the following sockets: 
+
+Emit on "products", receive on "products" and render them on /products/real
+Emit "new product" on client side + /products/real and save new data
+Receive "new product" on server side + /products/real and render them in real time in /products/real
 
 In order to test the use cases:
 

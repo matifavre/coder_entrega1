@@ -1,0 +1,77 @@
+<main class="d-flex w-100 flex-grow-1">
+  <section class="d-flex flex-column align-items-center w-50">
+    <h1 class="bg-success-subtle p-2 text-center text-success w-100">PRODUCT
+      REGISTER FORM</h1>
+    <form class="d-flex flex-column w-50 m-3">
+      <input
+        class="m-2 p-2 text-center"
+        type="text"
+        name="prod-title"
+        id="prod-title"
+        placeholder="PRODUCT TITLE"
+      />
+      <input
+        class="m-2 p-2 text-center"
+        type="text"
+        name="category"
+        id="category"
+        placeholder="CATEGORY"
+      />
+      <input
+        class="m-2 p-2 text-center"
+        type="number"
+        name="prod-price"
+        id="prod-price"
+        placeholder="PRICE"
+      />
+      <input
+        class="m-2 p-2 text-center"
+        type="number"
+        name="prod-stock"
+        id="prod-stock"
+        placeholder="STOCK"
+      />
+      <input
+        class="m-2 p-2 text-center"
+        type="text"
+        name="prod-image"
+        id="prod-image"
+        placeholder="PROD IMG"
+      />
+      <input
+        class="m-2 p-2 text-center btn btn-success"
+        type="button"
+        id="create"
+        value="CREATE PRODUCT"
+      />
+    </form>
+  </section>
+  <section
+    id="products"
+    class="d-flex flex-wrap"
+    style="width: 50%; height: calc(100vh - 60px);"
+  ></section>
+</main>
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script>
+const socket = io();
+socket.on("products", (data) => {
+  //console.log(data) const
+
+  template = data
+  .map((each) => `<img src="${each.photo}" alt="${each.id}" class="m-2 object-fit-cover">`)
+  .reverse()
+  .join("");
+  document.querySelector("#products").innerHTML = template;
+});
+
+document.querySelector("#create").addEventListener("click", (event) => {
+  const title = document.querySelector("#prod-title").value;
+  const category = document.querySelector("#category").value;
+  const image = document.querySelector("#prod-image").value;
+  const price = document.querySelector("#prod-price").value;
+  const stock = document.querySelector("#prod-stock").value;
+  socket.emit("create", { title, category, image, price, stock });
+});
+
+</script>
