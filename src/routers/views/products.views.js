@@ -20,4 +20,14 @@ productsRouter.get("/real", async (req, res, next) => {
   }
 });
 
+productsRouter.get("/:pid", async (req, res, next) => {
+  try {
+    const { pid } = req.params;
+    const product = await productManager.readOne(pid);
+    return res.render("product", { title: "PRODUCT", product });
+  } catch (error) {
+    return next(error);
+  }
+});
+
 export default productsRouter;

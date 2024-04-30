@@ -1,0 +1,19 @@
+<main class="d-flex flex-column align-items-center w-100 flex-grow-1">
+  <h1 class="bg-success-subtle p-2 text-center text-success w-100">ALL PRODUCTS
+    (Products)</h1>
+  <section
+    class="m-3 w-100 d-flex flex-column justify-content-center align-items-center"
+  >
+    <h5 class="m-2 p-2 text-center">TITLE: {{product.title}}</h5>
+    <h5 class="m-2 p-2 text-center">CATEGORY: {{product.category}}</h5>
+    <h5 class="m-2 p-2 text-center">PRICE: {{product.price}}</h5>
+    <h5 class="m-2 p-2 text-center">STOCK: {{product.stock}}</h5>
+    <img
+      style="width: 360px; height: 360px"
+      class="m-2 object-fit-cover"
+      src="{{product.photo}}"
+    />
+    <button id="addToCart" class="m-2 p-2 text-center btn btn-success">ADD TO
+      CART</button>
+  </section>
+</main>
