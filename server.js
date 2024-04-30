@@ -1,4 +1,6 @@
 import express from "express";
+import dotenv from "dotenv";
+dotenv.config();
 import morgan from "morgan";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
@@ -8,14 +10,17 @@ import { Server } from "socket.io";
 import { createServer } from "http";
 import __dirname from "./utils.js";
 import socketCb from "./src/routers/index.socket.js";
+import dbConnect from "./src/utils/dbConnect.util.js";
 
+//http server
 const server = express();
-const PORT = 8080;
-const ready = () => console.log("server ready on port " + PORT);
+const port = process.env.PORT || 9000;
+const ready = async () => {
+  console.log("server ready on port " + port);
+  await dbConnect();
+};
 const nodeServer = createServer(server);
-nodeServer.listen(PORT, ready);
-
-console.log("Directory for views:", __dirname + "/src/views");
+nodeServer.listen(port, ready);
 
 //tcp server
 const socketServer = new Server(nodeServer);
