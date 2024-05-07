@@ -10,9 +10,18 @@ usersRouter.get("/real", async (req, res, next) => {
     return next(error);
   }
 });
+
 usersRouter.get("/register", async (req, res, next) => {
   try {
     return res.render("register", { title: "REGISTER" });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+usersRouter.get("/login", async (req, res, next) => {
+  try {
+    return res.render("login", { title: "REGISTER" });
   } catch (error) {
     return next(error);
   }

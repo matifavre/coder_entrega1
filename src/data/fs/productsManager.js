@@ -90,7 +90,9 @@ class ProductManager {
           title: data.title,
           photo:
             data.image ||
-            `https://source.unsplash.com/random/200x200?sig=${Math.floor(Math.random() * 20) + 1}`,
+            `https://source.unsplash.com/random/200x200?sig=${
+              Math.floor(Math.random() * 20) + 1
+            }`,
           category: data.category,
           price: data.price,
           stock: data.stock,
@@ -131,6 +133,33 @@ class ProductManager {
       console.error("Error reading product:", error.message);
       // changed throw error for return error becuase I need to GET the error in the server.js
       return error;
+    }
+  }
+
+  async readByCategory(category) {
+    try {
+      const products = await fs.promises.readFile(this.path, "utf-8");
+      const filteredProducts = JSON.parse(products).filter(
+        (product) => product.category === category
+      );
+      return filteredProducts;
+    } catch (error) {
+      console.error("Error reading product:", error.message);
+      // changed throw error for return error becuase I need to GET the error in the server.js
+      return error;
+    }
+  }
+
+  async getUniqueCategories() {
+    try {
+      const products = await fs.promises.readFile(this.path, "utf-8");
+      const categories = [
+        ...new Set(JSON.parse(products).map((product) => product.category)),
+      ];
+      return categories;
+    } catch (error) {
+      console.error("Error fetching categories:", error.message);
+      return [];
     }
   }
 

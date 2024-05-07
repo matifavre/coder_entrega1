@@ -27,8 +27,19 @@ const socketServer = new Server(nodeServer);
 socketServer.on("connection", socketCb);
 export { socketServer };
 
+const helpers = {
+  ifEquals: function (arg1, arg2, options) {
+    return arg1 === arg2 ? options.fn(this) : options.inverse(this);
+  },
+};
+
 //template engine
-server.engine("handlebars", engine());
+server.engine(
+  "handlebars",
+  engine({
+    helpers: helpers,
+  })
+);
 server.set("view engine", "handlebars");
 server.set("views", __dirname + "/src/views");
 

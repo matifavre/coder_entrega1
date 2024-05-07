@@ -2,7 +2,6 @@ import { Router } from "express";
 import productsManager from "../../data/mongo/managers/ProductManager.mongo.js";
 const productsRouter = Router();
 
-
 productsRouter.get("/", read);
 productsRouter.get("/:pid", readOne);
 productsRouter.put("/:pid", update);
@@ -43,18 +42,21 @@ async function read(req, res, next) {
 async function readOne(req, res, next) {
   try {
     const { pid } = req.params;
+    console.log("Fetching product with ID:", pid);
     const one = await productsManager.readOne(pid);
+    console.log("Product fetch result:", one);
     if (one) {
       return res.json({
         statusCode: 200,
         response: one,
       });
     } else {
-      const error = new Error("Not found!");
+      const error = new Error("Product not found!");
       error.statusCode = 404;
       throw error;
     }
   } catch (error) {
+    console.error("Error fetching product:", error);
     return next(error);
   }
 }

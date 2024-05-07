@@ -10,8 +10,22 @@ viewsRouter.use("/users", usersRouter);
 
 viewsRouter.get("/", async (req, res, next) => {
   try {
-    const products = await productManager.read();
-    return res.render("index", { title: "HOME", products });
+    const { category } = req.query;
+    let products;
+    const categories = await productManager.getUniqueCategories();
+
+    if (category) {
+      products = await productManager.readByCategory(category);
+    } else {
+      products = await productManager.read();
+    }
+
+    return res.render("index", {
+      title: "HOME",
+      products,
+      categories,
+      selectedCategory: category,
+    });
   } catch (error) {
     return next(error);
   }

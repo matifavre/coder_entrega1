@@ -1,19 +1,47 @@
-<main class="d-flex flex-column align-items-center w-100 flex-grow-1">
-  <h1 class="bg-success-subtle p-2 text-center text-success w-100">ALL PRODUCTS
-    (Products)</h1>
+<main
+  class="d-flex flex-column align-items-center w-100 flex-grow-1"
+  style="padding-top: 100px !important;"
+>
   <section
     class="m-3 w-100 d-flex flex-column justify-content-center align-items-center"
   >
-    <h5 class="m-2 p-2 text-center">TITLE: {{product.title}}</h5>
-    <h5 class="m-2 p-2 text-center">CATEGORY: {{product.category}}</h5>
-    <h5 class="m-2 p-2 text-center">PRICE: {{product.price}}</h5>
-    <h5 class="m-2 p-2 text-center">STOCK: {{product.stock}}</h5>
-    <img
-      style="width: 360px; height: 360px"
-      class="m-2 object-fit-cover"
-      src="{{product.photo}}"
-    />
-    <button id="addToCart" class="m-2 p-2 text-center btn btn-success">ADD TO
-      CART</button>
+    <div class="card mb-4" style="width: 400px">
+      <img class="card-img-top" src={{product.photo}} alt="Card image cap" />
+      <div class="card-body p-3">
+        <h5 class="card-title">{{product.title}}</h5>
+        <p class="card-text">{{product.category}}</p>
+        <p class="card-text">Available Stock: {{product.stock}}</p>
+        <h4 class="font-weight-bold text-center pt-3">${{product.price}}</h4>
+        <div class="d-flex justify-content-center align-items-center w-100 p-3">
+        <button class="addToCart m-2 p-2 text-center btn btn-success"
+            data-product-id="{{product.id}}"
+            >ADD TO CART</button>
+        </div>
+      </div>
+    </div>
   </section>
 </main>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.addToCart').forEach(button => {
+    button.addEventListener('click', function() {
+      const productId = this.getAttribute('data-product-id');
+      const userId = 'c5a4d500e3017ac98ff08f0f'; // Example user ID
+      const quantity = 1;
+      console.log(productId, userId, quantity);
+      fetch(`/api/add-to-cart/${productId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, quantity })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    });
+  });
+});
+</script>
