@@ -1,11 +1,16 @@
 import { Router } from "express";
-import productsManager from "../../data/mongo/managers/ProductManager.mongo.js";
+import productsManager from "../../data/mongo/ProductsManager.mongo.js";
+import isText from "../../middlewares/isText.mid.js";
+import isValidAdmin from "../../middlewares/isValidAdmin.mid.js";
+
 const productsRouter = Router();
 
 productsRouter.get("/", read);
-productsRouter.get("/:pid", readOne);
-productsRouter.put("/:pid", update);
-productsRouter.delete("/:pid", destroy);
+productsRouter.get("/paginate", paginate);
+productsRouter.get("/:nid", readOne);
+productsRouter.post("/", isValidAdmin, isText, create);
+productsRouter.put("/:nid", update);
+productsRouter.delete("/:nid", destroy);
 
 async function create(req, res, next) {
   try {
@@ -13,7 +18,7 @@ async function create(req, res, next) {
     const one = await productsManager.create(data);
     return res.json({
       statusCode: 201,
-      message: "CREATED PRODUCT: " + one.id,
+      message: "CREATED ID: " + one.id,
     });
   } catch (error) {
     return next(error);
@@ -39,33 +44,61 @@ async function read(req, res, next) {
   }
 }
 
+async function paginate(req, res, next) {
+  try {
+    const filter = {};
+    const opts = { page: 1, limit: 9, lean: true, sort: { title: 1 } };
+    if (req.query.limit) {
+      opts.limit = req.query.limit;
+    }
+    if (req.query.page) {
+      opts.page = req.query.page;
+    }
+    if (req.query.title) {
+      filter.title = new RegExp(req.query.title, "i")
+    }
+    const all = await productsManager.paginate({ filter, opts });
+    return res.json({
+      statusCode: 200,
+      response: all.docs,
+      info: {
+        totalDocs: all.totalDocs,
+        page: all.page,
+        totalPages: all.totalPages,
+        limit: all.limit,
+        prevPage: all.prevPage,
+        nextPage: all.nextPage,
+      },
+    });
+  } catch (error) {
+    return next(error);
+  }
+}
+
 async function readOne(req, res, next) {
   try {
-    const { pid } = req.params;
-    console.log("Fetching product with ID:", pid);
-    const one = await productsManager.readOne(pid);
-    console.log("Product fetch result:", one);
+    const { nid } = req.params;
+    const one = await productsManager.readOne(nid);
     if (one) {
       return res.json({
         statusCode: 200,
         response: one,
       });
     } else {
-      const error = new Error("Product not found!");
+      const error = new Error("Not found!");
       error.statusCode = 404;
       throw error;
     }
   } catch (error) {
-    console.error("Error fetching product:", error);
     return next(error);
   }
 }
 
 async function update(req, res, next) {
   try {
-    const { pid } = req.params;
+    const { nid } = req.params;
     const data = req.body;
-    const one = await productsManager.update(pid, data);
+    const one = await productsManager.update(nid, data);
     return res.json({
       statusCode: 200,
       response: one,
@@ -77,8 +110,8 @@ async function update(req, res, next) {
 
 async function destroy(req, res, next) {
   try {
-    const { pid } = req.params;
-    const one = await productsManager.destroy(pid);
+    const { nid } = req.params;
+    const one = await productsManager.destroy(nid);
     return res.json({
       statusCode: 200,
       response: one,

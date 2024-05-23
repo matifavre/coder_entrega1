@@ -502,5 +502,59 @@
       "price": "123",
       "stock": "21",
       "date": "2024-04-30T21:02:36.029Z"
+   },
+   {
+      "id": "a600c3b7fa43c6748eba8859",
+      "title": "new teta operada",
+      "photo": "https://source.unsplash.com/random/200x200?sig=7",
+      "category": "falsa",
+      "price": "45",
+      "stock": "7",
+      "date": "2024-05-08T19:12:21.289Z"
+   },
+   {
+      "id": "e999105acd5450f1f8571974",
+      "title": "new teta operada",
+      "photo": "https://source.unsplash.com/random/200x200?sig=3",
+      "category": "falsa",
+      "price": "45",
+      "stock": "7",
+      "date": "2024-05-08T19:12:25.911Z"
+   },
+   {
+      "id": "656255f72553cb5432e5a5db",
+      "title": "new teta operada",
+      "photo": "https://source.unsplash.com/random/200x200?sig=6",
+      "category": "falsa",
+      "price": "45",
+      "stock": "7",
+      "date": "2024-05-08T19:12:29.807Z"
+   },
+   {
+      "id": "b216cbfc41d3f687e097b4fc",
+      "title": "new teta operada",
+      "photo": "https://source.unsplash.com/random/200x200?sig=16",
+      "category": "falsa",
+      "price": "45",
+      "stock": "7",
+      "date": "2024-05-08T19:12:31.019Z"
+   },
+   {
+      "id": "04c4c9f1b3ba4456749f221b",
+      "title": "new teta operada",
+      "photo": "https://source.unsplash.com/random/200x200?sig=15",
+      "category": "falsa",
+      "price": "45",
+      "stock": "7",
+      "date": "2024-05-08T19:12:31.024Z"
+   },
+   {
+      "id": "ec02d02b2e99a50690608413",
+      "title": "new teta operada",
+      "photo": "https://source.unsplash.com/random/200x200?sig=16",
+      "category": "falsa",
+      "price": "45",
+      "stock": "7",
+      "date": "2024-05-08T19:12:34.291Z"
    }
 ]

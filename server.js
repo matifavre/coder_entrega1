@@ -1,6 +1,6 @@
-import express from "express";
 import dotenv from "dotenv";
-dotenv.config();
+import express from "express";
+import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import errorHandler from "./src/middlewares/errorHandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
@@ -19,8 +19,7 @@ const ready = async () => {
   console.log("server ready on port " + port);
   await dbConnect();
 };
-const nodeServer = createServer(server);
-nodeServer.listen(port, ready);
+server.listen(port, ready);
 
 //tcp server
 const socketServer = new Server(nodeServer);
@@ -46,8 +45,27 @@ server.set("views", __dirname + "/src/views");
 //middlewares
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
-server.use(morgan("dev"));
 server.use(express.static(__dirname + "/public"));
+server.use(morgan("dev"));
+server.use(cookieParser(process.env.SECRET_COOKIE));
+//const FileSession = fileStore(session);
+server.use(
+  session({
+    /* file store */
+    /*
+      store: new FileSession({
+      path: "./src/data/fs/files/sessions",
+      ttl: 60 * 60,
+    }),
+    */
+    store: new MongoStore({ mongoUrl: process.env.MONGO_URI, ttl: 60 * 60 }),
+    secret: process.env.SECRET_SESSION,
+    resave: true,
+    saveUninitialized: true,
+    //cookie: { maxAge: 60 * 60 * 1000 },
+  })
+);
+
 
 //endpoints
 server.use("/", indexRouter);
