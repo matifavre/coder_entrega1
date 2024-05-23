@@ -40,26 +40,31 @@ class ProductManager {
       { title: "Product 18", category: "Sports", price: 124.0, stock: 44 },
       { title: "Product 19", category: "Sports", price: 271.33, stock: 32 },
       { title: "Product 20", category: "Groceries", price: 587.69, stock: 63 },
-      {title: "Product 21", category: "Books", price: 17.99, stock: 40},
-      {title: "Product 22", category: "Electronics", price: 250.00, stock: 50},
-      {title: "Product 23", category: "Clothing", price: 35.00, stock: 75},
-      {title: "Product 24", category: "Groceries", price: 4.99, stock: 150},
-      {title: "Product 25", category: "Toys", price: 29.99, stock: 65},
-      {title: "Product 26", category: "Books", price: 22.99, stock: 55},
-      {title: "Product 27", category: "Electronics", price: 499.99, stock: 20},
-      {title: "Product 28", category: "Clothing", price: 60.00, stock: 80},
-      {title: "Product 29", category: "Groceries", price: 6.49, stock: 100},
-      {title: "Product 30", category: "Toys", price: 40.99, stock: 70},
-      {title: "Product 31", category: "Sports", price: 200.00, stock: 30},
-      {title: "Product 32", category: "Electronics", price: 850.00, stock: 25},
-      {title: "Product 33", category: "Groceries", price: 5.99, stock: 95},
-      {title: "Product 34", category: "Books", price: 14.99, stock: 60},
-      {title: "Product 35", category: "Groceries", price: 3.99, stock: 120},
-      {title: "Product 36", category: "Clothing", price: 45.00, stock: 50},
-      {title: "Product 37", category: "Toys", price: 55.00, stock: 40},
-      {title: "Product 38", category: "Sports", price: 150.00, stock: 35},
-      {title: "Product 39", category: "Sports", price: 220.00, stock: 28},
-      {title: "Product 40", category: "Groceries", price: 8.50, stock: 110}
+      { title: "Product 21", category: "Books", price: 17.99, stock: 40 },
+      { title: "Product 22", category: "Electronics", price: 250.0, stock: 50 },
+      { title: "Product 23", category: "Clothing", price: 35.0, stock: 75 },
+      { title: "Product 24", category: "Groceries", price: 4.99, stock: 150 },
+      { title: "Product 25", category: "Toys", price: 29.99, stock: 65 },
+      { title: "Product 26", category: "Books", price: 22.99, stock: 55 },
+      {
+        title: "Product 27",
+        category: "Electronics",
+        price: 499.99,
+        stock: 20,
+      },
+      { title: "Product 28", category: "Clothing", price: 60.0, stock: 80 },
+      { title: "Product 29", category: "Groceries", price: 6.49, stock: 100 },
+      { title: "Product 30", category: "Toys", price: 40.99, stock: 70 },
+      { title: "Product 31", category: "Sports", price: 200.0, stock: 30 },
+      { title: "Product 32", category: "Electronics", price: 850.0, stock: 25 },
+      { title: "Product 33", category: "Groceries", price: 5.99, stock: 95 },
+      { title: "Product 34", category: "Books", price: 14.99, stock: 60 },
+      { title: "Product 35", category: "Groceries", price: 3.99, stock: 120 },
+      { title: "Product 36", category: "Clothing", price: 45.0, stock: 50 },
+      { title: "Product 37", category: "Toys", price: 55.0, stock: 40 },
+      { title: "Product 38", category: "Sports", price: 150.0, stock: 35 },
+      { title: "Product 39", category: "Sports", price: 220.0, stock: 28 },
+      { title: "Product 40", category: "Groceries", price: 8.5, stock: 110 },
     ];
     // Iterate over the products and save each one
     for (const product of productsToSave) {
@@ -83,7 +88,11 @@ class ProductManager {
         const product = {
           id: crypto.randomBytes(12).toString("hex"),
           title: data.title,
-          photo: data.photo || "defaultphoto.jpg",
+          photo:
+            data.image ||
+            `https://source.unsplash.com/random/200x200?sig=${
+              Math.floor(Math.random() * 20) + 1
+            }`,
           category: data.category,
           price: data.price,
           stock: data.stock,
@@ -124,6 +133,33 @@ class ProductManager {
       console.error("Error reading product:", error.message);
       // changed throw error for return error becuase I need to GET the error in the server.js
       return error;
+    }
+  }
+
+  async readByCategory(category) {
+    try {
+      const products = await fs.promises.readFile(this.path, "utf-8");
+      const filteredProducts = JSON.parse(products).filter(
+        (product) => product.category === category
+      );
+      return filteredProducts;
+    } catch (error) {
+      console.error("Error reading product:", error.message);
+      // changed throw error for return error becuase I need to GET the error in the server.js
+      return error;
+    }
+  }
+
+  async getUniqueCategories() {
+    try {
+      const products = await fs.promises.readFile(this.path, "utf-8");
+      const categories = [
+        ...new Set(JSON.parse(products).map((product) => product.category)),
+      ];
+      return categories;
+    } catch (error) {
+      console.error("Error fetching categories:", error.message);
+      return [];
     }
   }
 
