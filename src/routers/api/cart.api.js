@@ -1,19 +1,18 @@
 import { Router } from "express";
-import cartManager from "../../data/mongo/managers/CartManager.mongo.js";
-import productsManager from "../../data/mongo/managers/ProductManager.mongo.js";
+import cartsManager from "../../data/mongo/CartManager.mongo.js";
 
-const cartRouter = Router();
+const cartsRouter = Router();
 
-cartRouter.get("/", read);
-cartRouter.get("/:pid", readOne);
-cartRouter.post("/", create);
-cartRouter.put("/:pid", update);
-cartRouter.delete("/:pid", destroy);
+cartsRouter.get("/", read);
+cartsRouter.get("/:nid", readOne);
+cartsRouter.post("/", create);
+cartsRouter.put("/:nid", update);
+cartsRouter.delete("/:nid", destroy);
 
 async function create(req, res, next) {
   try {
     const data = req.body;
-    const one = await cartManager.create(data);
+    const one = await cartsManager.create(data);
     return res.json({
       statusCode: 201,
       message: "CREATED ID: " + one.id,
@@ -26,7 +25,7 @@ async function create(req, res, next) {
 async function read(req, res, next) {
   try {
     const { user_id } = req.query;
-    const all = await cartManager.read({ user_id });
+    const all = await cartsManager.read({ user_id });
     if (all.length > 0) {
       return res.json({
         statusCode: 200,
@@ -45,7 +44,7 @@ async function read(req, res, next) {
 async function readOne(req, res, next) {
   try {
     const { nid } = req.params;
-    const one = await cartManager.readOne(nid);
+    const one = await cartsManager.readOne(nid);
     if (one) {
       return res.json({
         statusCode: 200,
@@ -65,7 +64,7 @@ async function update(req, res, next) {
   try {
     const { nid } = req.params;
     const data = req.body;
-    const one = await cartManager.update(nid, data);
+    const one = await cartsManager.update(nid, data);
     return res.json({
       statusCode: 200,
       response: one,
@@ -78,7 +77,7 @@ async function update(req, res, next) {
 async function destroy(req, res, next) {
   try {
     const { nid } = req.params;
-    const one = await cartManager.destroy(nid);
+    const one = await cartsManager.destroy(nid);
     return res.json({
       statusCode: 200,
       response: one,
@@ -88,27 +87,4 @@ async function destroy(req, res, next) {
   }
 }
 
-
-/*async function addToCart(req, res, next) {
-  const { pid } = req.params;  
-  const userId = req.body.userId;  
-  const quantity = req.body.quantity || 1;  
-
-  try {
-    const product = await productsManager.readOne(pid);
-    if (!product) {
-      return res.status(404).json({ message: "Product not found!" });
-    }
-    const cartItem = await cartManager.create(userId, pid, quantity);
-    return res.status(201).json({
-      message: "Product added to cart successfully",
-      cartItem: cartItem,
-    });
-  } catch (error) {
-    console.error("Error adding to cart:", error.message);
-    next(error);
-  }
-}
-*/
-
-export default cartRouter;
+export default cartsRouter;

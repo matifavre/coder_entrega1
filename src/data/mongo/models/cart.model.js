@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Types } from "mongoose";  // Import Types from mongoose
 
 const collection = "carts";
 const schema = new Schema(
@@ -27,6 +27,8 @@ const schema = new Schema(
   }
 );
 
+// Make sure to import mongoosePaginate if it's not imported yet
+import mongoosePaginate from "mongoose-paginate-v2";
 schema.plugin(mongoosePaginate);
 
 schema.pre("find", function () { this.populate("user_id", "email photo") });
