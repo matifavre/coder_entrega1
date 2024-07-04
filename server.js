@@ -1,239 +1,85 @@
+import dotenv from "dotenv";
 import express from "express";
-import productManager from "./src/data/fs/productsManager.js";
-import userManager from "./src/data/fs/usersManager.js";
+import cookieParser from "cookie-parser";
+import morgan from "morgan";
+import session from "express-session";
+import MongoStore from "connect-mongo";
+import errorHandler from "./src/middlewares/errorHandler.mid.js";
+import pathHandler from "./src/middlewares/pathHandler.mid.js";
+import indexRouter from "./src/routers/index.router.js";
+import { engine } from "express-handlebars";
+import { Server } from "socket.io";
+import { createServer } from "http";
+import __dirname from "./utils.js";
+import socketCb from "./src/routers/index.socket.js";
+import expressSession from "express-session";
+import environment from "./src/utils/env.util.js";
+import express from "express";
+import morgan from "morgan";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import argsUtil from "./src/utils/args.util.js";
+
+dotenv.config(); // Load environment variables from .env file
+
+// Express app
+//const app = express();
+//const port = process.env.PORT || 9000;
+
+//const ready = async () => {
+//console.log("server ready on port " + port);
+//await dbConnect();
+//};
+
+// Create HTTP server
+//const httpServer = createServer(app);
+//httpServer.listen(port, ready);
 
 const server = express();
-const PORT = 8080;
-server.listen(PORT, () => console.log(`Server ready on port ${PORT}`));
+const port = environment.PORT || argsUtil.p;
+const ready = async () => console.log("server ready on port " + port);
+server.listen(port, ready);
 
+// Create Socket.io server
+const socketServer = new Server(httpServer);
+socketServer.on("connection", socketCb);
+export { socketServer };
+
+const helpers = {
+  ifEquals: function (arg1, arg2, options) {
+    return arg1 === arg2 ? options.fn(this) : options.inverse(this);
+  },
+};
+
+// Template engine
+app.engine(
+  "handlebars",
+  engine({
+    helpers: helpers,
+  })
+);
+app.set("view engine", "handlebars");
+app.set("views", __dirname + "/src/views");
+
+// Middlewares
 server.use(express.json());
-server.use(express.urlencoded({ extended: true })); // Force the server to read params/queries + req.params + req.query
+server.use(express.urlencoded({ extended: true }));
+server.use(express.static(__dirname + "/public"));
+server.use(morgan("dev"));
+server.use(cookieParser(environment.SECRET_COOKIE));
+server.use(cors({ origin: true, credentials: true }));
 
-// POST / api/products
+/*app.use(
+  session({
+    store: new MongoStore({ mongoUrl: process.env.MONGO_URI, ttl: 60 * 60 }),
+    secret: process.env.SECRET_SESSION,
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+*/
 
-server.post("/api/products", async (req, res) => {
-  try {
-    const productData = req.body;
-    const product = await productManager.create(productData);
-    if (product) {
-      return res.status(201).json({
-        statusCode: 201,
-        response: product.id,
-        message: "Product created successfully",
-      });
-    } else {
-      return res.status(400).json({
-        message: "Product creation failed",
-      });
-    }
-  } catch (error) {
-    console.error(error);
-    return res.status(error.statusCode || 500).json({
-      response: error.message,
-      success: false,
-    });
-  }
-});
-
-// GET /api/products
-server.get("/api/products", async (req, res) => {
-  try {
-    const { category } = req.query;
-    const products = await productManager.read();
-    const filteredProducts = category
-      ? products.filter((product) => product.category === category)
-      : products;
-    if (filteredProducts.length !== 0) {
-      return res.status(200).json({
-        statusCode: 200,
-        response: filteredProducts,
-      });
-    } else {
-      return res.status(404).json({
-        statusCode: 404,
-        response: null,
-        message: "No products found",
-      });
-    }
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      response: error.message,
-      success: false,
-    });
-  }
-});
-
-// GET /api/products/:pid
-server.get("/api/products/:pid", async (req, res) => {
-  try {
-    const { pid } = req.params;
-    const product = await productManager.readOne(pid);
-    if (product) {
-      return res.status(200).json({
-        statusCode: 200,
-        response: product,
-      });
-    } else {
-      return res.status(404).json({
-        statusCode: 404,
-        response: null,
-        message: "Product not found",
-      });
-    }
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      response: error.message,
-      success: false,
-    });
-  }
-});
-
-// PUT /api/products/:pid
-server.put("/api/products/:pid", async (req, res) => {
-  try {
-    const { pid } = req.params;
-    const productData = req.body;
-    const updatedProduct = await productManager.update(pid, productData);
-    return res.status(200).json({
-      statusCode: 200,
-      response: updatedProduct,
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      response: error.message,
-      success: false,
-    });
-  }
-});
-
-//DELETE api/products/:pid
-server.delete("/api/products/:pid", async (req, res) => {
-  try {
-    const { pid } = req.params;
-    const deletedProduct = await productManager.destroy(pid);
-    return res.status(200).json({
-      statusCode: 200,
-      response: deletedProduct,
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      response: error.message,
-      success: false,
-    });
-  }
-});
-
-// POST api/users
-server.post("/api/users", async (req, res) => {
-  try {
-    const userData = req.body;
-    const user = await userManager.create(userData);
-    return res.status(201).json({
-      statusCode: 201,
-      response: user.id, // This should now work as expected
-      message: "User created successfully",
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(error.statusCode || 500).json({
-      response: error.message,
-      success: false,
-    });
-  }
-});
-
-// GET /api/users
-server.get("/api/users", async (req, res) => {
-  try {
-    const { role } = req.query;
-    const users = await userManager.read();
-    const filteredUsers = role
-      ? users.filter((user) => user.role === role)
-      : users;
-    return res.status(200).json({
-      statusCode: 200,
-      response: filteredUsers,
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      response: error.message,
-      success: false,
-    });
-  }
-});
-
-server.get("/api/users/:uid", async (req, res) => {
-  try {
-    const { uid } = req.params;
-    const user = await userManager.readOne(uid);
-    if (user) {
-      return res.status(200).json({
-        statusCode: 200,
-        response: user,
-      });
-    } else {
-      return res.status(404).json({
-        statusCode: 404,
-        message: "User not found",
-      });
-    }
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      response: error.message,
-      success: false,
-    });
-  }
-});
-
-//DELETE /api/users/:uid
-server.delete("/api/users/:uid", async (req, res) => {
-  try {
-    const { uid } = req.params;
-    const deletedUser = await userManager.destroy(uid);
-    return res.status(200).json({
-      statusCode: 200,
-      response: deletedUser,
-      message: "User deleted successfully",
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      response: error.message,
-      success: false,
-    });
-  }
-});
-
-//PUT /api/users/:uid
-server.put("/api/users/:uid", async (req, res) => {
-  try {
-    const { uid } = req.params;
-    const userData = req.body;
-    const updatedUser = await userManager.update(uid, userData);
-    return res.status(200).json({
-      statusCode: 200,
-      response: updatedUser,
-      message: "User updated successfully",
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      response: error.message,
-      success: false,
-    });
-  }
-});
-
-// Handle non-existing routes
-server.use((req, res) => {
-  res.status(404).json({
-    statusCode: 404,
-    message: "Route not found",
-  });
-});
+// Endpoints
+server.use("/", indexRouter);
+server.use(errorHandler);
+server.use(pathHandler);
