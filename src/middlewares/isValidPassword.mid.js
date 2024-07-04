@@ -1,4 +1,4 @@
-import usersManager from "../data/mongo/UsersManager.mongo.js";
+import usersManager from "../dao/mongo/UsersManager.mongo.js";
 import { verifyHash } from "../utils/hash.util.js";
 
 async function isValidPassword(req, res, next) {

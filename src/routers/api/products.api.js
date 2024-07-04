@@ -1,5 +1,5 @@
 import { Router } from "express";
-import productsManager from "../../data/mongo/ProductsManager.mongo.js";
+import productsManager from "../../dao/mongo/ProductsManager.mongo.js";
 import isText from "../../middlewares/isText.mid.js";
 import isValidAdmin from "../../middlewares/isValidAdmin.mid.js";
 
@@ -55,7 +55,7 @@ async function paginate(req, res, next) {
       opts.page = req.query.page;
     }
     if (req.query.title) {
-      filter.title = new RegExp(req.query.title, "i")
+      filter.title = new RegExp(req.query.title, "i");
     }
     const all = await productsManager.paginate({ filter, opts });
     return res.json({

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { verifyToken } from "../utils/token.util.js";
-import usersManager from "../data/mongo/UsersManager.mongo.js";
+import usersManager from "../dao/mongo/UsersManager.mongo.js";
 
 class CustomRouter {
   //para construir y configurar cada instancia del enrutador

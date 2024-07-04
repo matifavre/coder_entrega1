@@ -1,6 +1,6 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
-import usersManager from "../data/mongo/UsersManager.mongo.js";
+import usersManager from "../dao/mongo/UsersManager.mongo.js";
 import { createHash, verifyHash } from "../utils/hash.util.js";
 
 passport.use(

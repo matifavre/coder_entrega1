@@ -1,62 +1,33 @@
-import { Router } from "express";
-import usersManager from "../../data/mongo/UsersManager.mongo.js";
-import isValidUser from "../../middlewares/isValidUser.mid.js";
-import isValidPassword from "../../middlewares/isValidPassword.mid.js";
+import CustomRouter from "../CustomRouter.js";
 import passport from "../../middlewares/passport.mid.js";
+import passportCb from "../../middlewares/passportCb.mid.js";
+import {
+  register,
+  login,
+  signout,
+  google,
+  profile,
+} from "../../controllers/sessions.controller.js";
 
-const sessionsRouter = Router();
+class SessionsRouter extends CustomRouter {
+  init() {
+    this.create("/register", ["PUBLIC"], passportCb("register"), register);
+    this.create("/login", ["PUBLIC"], passportCb("login"), login);
+    this.read("/online", ["USER", "ADMIN"], passportCb("jwt"), profile);
+    this.create("/signout", ["USER", "ADMIN"], signout);
+    this.read(
+      "/google",
+      ["PUBLIC"],
+      passport.authenticate("google", { scope: ["email", "profile"] })
+    );
+    this.read(
+      "/google/callback",
+      ["PUBLIC"],
+      passport.authenticate("google", { session: false }),
+      google
+    );
+  }
+}
 
-sessionsRouter.post(
-  "/register",
-  passport.authenticate("register", { session: false }),
-  async (req, res, next) => {
-    try {
-      return res.json({ statusCode: 201, message: "Registered!" });
-    } catch (error) {
-      return next(error);
-    }
-  }
-);
-sessionsRouter.post(
-  "/login",
-  passport.authenticate("login", { session: false }),
-  async (req, res, next) => {
-    try {
-      return res.json({ statusCode: 200, message: "Logged in!" });
-    } catch (error) {
-      return next(error);
-    }
-  }
-);
-sessionsRouter.get("/online", async (req, res, next) => {
-  try {
-    if (req.session.online) {
-      return res.json({
-        statusCode: 200,
-        message: "Is online",
-        user_id: req.session.user_id,
-      });
-    }
-    return res.json({
-      statusCode: 401,
-      message: "Bad auth",
-    });
-  } catch (error) {
-    return next(error);
-  }
-});
-sessionsRouter.post("/signout", (req, res, next) => {
-  try {
-    if (req.session.email) {
-      req.session.destroy();
-      return res.json({ statusCode: 200, message: "Signed out" });
-    }
-    const error = new Error("Invalid credentials from signout");
-    error.statusCode = 401;
-    throw error;
-  } catch (error) {
-    return next(error);
-  }
-});
-
-export default sessionsRouter;
+const sessionsRouter = new SessionsRouter();
+export default sessionsRouter.getRouter();
