@@ -12,13 +12,10 @@ class UsersDTO {
     this.last_name = data.last_name;
     this.email = data.email;
     this.password = createHash(data.password);
-    this.role = data.role || 0;
+    this.role = data.role || "USER";
     this.avatar = data.avatar || "https://i.postimg.cc/wTgNFWhR/profile.png";
     this.verify = data.verify || false;
     this.verifyCode = crypto.randomBytes(12).toString("hex");
-    //verificar si corresponde o no evaluar el heasheo de la contraseña
-    //porque el enrutador de sessions (/api/sessions/register) está usando PASSPORT!!!
-    //pero yo acá estoy usando el CRUD de users (/api/users)
     persistence !== "mongo" && (this.createdAt = new Date());
     persistence !== "mongo" && (this.updatedAt = new Date());
   }
