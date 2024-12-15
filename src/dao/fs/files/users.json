@@ -1,0 +1,44 @@
+[
+  {
+    "id": "c5a4d500e3017ac98ff08f0f",
+    "photo": "https://source.unsplash.com/random/200x200?sig=10",
+    "email": "testinganotheremail1@gmail.com",
+    "password": "notasafepassword1",
+    "role": "Admin"
+  },
+  {
+    "id": "35248375981ff2eb6f98041f",
+    "photo": "https://source.unsplash.com/random/200x200?sig=11",
+    "email": "testinganotheremail2@gmail.com",
+    "password": "notasafepassword2",
+    "role": "Super User"
+  },
+  {
+    "id": "8513b95ff4c1d6bc441a5656",
+    "photo": "https://source.unsplash.com/random/200x200?sig=9",
+    "email": "testinganotheremail3@gmail.com",
+    "password": "notasafepassword3",
+    "role": "Dev"
+  },
+  {
+    "id": "285b8c693bf54f275b3bc217",
+    "photo": "https://source.unsplash.com/random/200x200?sig=12",
+    "email": "testinganotheremail4@gmail.com",
+    "password": "notasafepassword4",
+    "role": "User"
+  },
+  {
+    "id": "075453debac81fe312117e6e",
+    "photo": "https://source.unsplash.com/random/200x200?sig=13",
+    "email": "updatingviapostman@gmail.com",
+    "password": "thisisnotasecurepassword",
+    "role": "New Admin"
+  },
+  {
+    "id": "3fa9f08da795a949141ae0de",
+    "photo": "https://source.unsplash.com/random/200x200?sig=15",
+    "email": "updatingviapostman@gmail.com",
+    "password": "thisisnotasecurepassword",
+    "role": "New Admin"
+  }
+]
